@@ -45,10 +45,74 @@ ver funcionamiento
 minikube dashboard
 
 
+Parar minikube
+minikube stop
+
+desistalar MiniKube
+- parar la mquina   minikube stop
+
+
+Actualizar minikube
+minikube update-check
 
 
 
 
+arranca por defecto una maquina con 
+2 cpus, 
+2 gb de memoria
+20 gb de disco duro
+
+se puede cambiar asi:
+
+minikube config set memory 4
+
+minikube start              --> sigue teniendo los 2GB
+
+minikube config view            --> ver configuracion 
+
+minikube delete
+
+minikube start              --> luego de eliminado e iniciado ya debe tomar los cambios de recursos
 
 
+------
+Crear perfil        (ejemplo simulando dos cluster)
 
+minikube profile cliente2
+
+minikube start -p cliente2              --> iniciar perfil
+
+minikube delete -p cliente2             --> eliminar perfil
+
+minikube config                 --> opciones de configuracion
+
+
+ver en cual perfil se esta 
+minikube profile
+
+Namespaces:  cluster virtuales dentro del mismo cluster fisico
+forma de separar por ambitos (ejemplo: desarrollo, produccion) o por cliente ( cliente1, cliente2)
+no se pueden tener dos objetos con el mismo nombre dentro de un mismo Namespace
+
+
+ver Namespaces
+desde minikube dashboard        -->> opcion Namespaces
+o desde linea de comandos:
+
+kubectl get namespaces
+
+como crear un namespace?
+kubectl create namespace cursocmd
+kubectl get namespaces
+
+otra forma es usando un archivo .yml
+kubectl apply -f namespace.yml 
+
+eliminar namespace
+kubectl delete namespace cursocmd
+con la plantilla
+kubectl delete -f namespace.yml             --> con el apply crea los recursos definidos en la plantilla y con el delete los elimina
+
+
+Pods
