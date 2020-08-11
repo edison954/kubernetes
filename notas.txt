@@ -10,4 +10,45 @@ Instalar virutalbox
 https://www.virtualbox.org/wiki/Downloads
 
 
+Instalar MiniKube
+
+https://kubernetes.io/es/docs/tasks/tools/install-minikube/
+
+
+minikube start              --> por defecto usa driver hyperv
+
+si falla
+minikube delete
+https://minikube.sigs.k8s.io/docs/drivers/
+
+usando docker como driver
+minikube start --driver=docker
+
+You can also use 'minikube kubectl -- get pods' to invoke a matching version
+
+poner docker como el driver por defecto 
+
+minikube config set driver docker
+
+
+minikube start
+
+con virutalbox
+https://minikube.sigs.k8s.io/docs/drivers/virtualbox/
+minikube start --driver=virtualbox
+minikube config set driver virtualbox
+
+--------------------
+
+ver funcionamiento
+
+minikube dashboard
+
+
+
+
+
+
+
+
 
