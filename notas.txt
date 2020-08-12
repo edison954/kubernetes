@@ -115,4 +115,128 @@ con la plantilla
 kubectl delete -f namespace.yml             --> con el apply crea los recursos definidos en la plantilla y con el delete los elimina
 
 
-Pods
+Pods:
+es un contenedor  (podria ser que un pod tuviese mas de un contenedor pero normalmente contiene 1 uniquo contenedor)
+tiene su propia direccion ip, espacios de almacenamiento.
+ej: (un pod para motor de bd, para servidor de aplicaciones)
+es la unidad minima de trabajo (crea la instancia de una imagen es decir un contenedor)
+
+Crear un pod
+kubectl apply -f pod.yml
+
+ver pods
+kubectl get pods
+kubectl describe pod wildfly                --> mas detalles del pod
+
+acceder al pod          (ingresar al contenedor)
+kubectl exec -it wildfly -- /bin/bash                   --> ejecutar consola de bash
+kubectl exec -it wildfly -- bash
+
+ver los logs de un pod
+kubectl logs -f wildfly
+
+cuando crear un pod?
+cuando se necesita procesar con escalado.
+
+Deployments                     --> para indicar de entrada cuantas instancias se desean de un determinado pod
+kubectl apply -f deployment.yml 
+kubectl get deployments
+
+kubectl get pods
+
+kubectl delete -f deployment.yml            --> eliminar el deployment
+
+
+Servicios:              --> punto de entrada para los pods.  (ya que los pods se destruyen o crean)
+se accede al servicio y da lo mismo si tiene de tras 1 o varios pods
+necesarios por ejemplo cuando se tienen un contenedor de app y otro de bd y se necesitan ver. 
+
+kubectl apply -f deploymentWildFly.yml
+kubectl apply -f deploymentMariadb.yml
+
+kubectl get deployments.apps
+
+kubectl get pods
+ver la descripcion de un pod (ver la ip)
+kubectl describe pod mariadb-deployment-665ddcd6f-b4zls             --> nombre del pod tomado de get pods 
+
+ingresar al otro pod
+kubectl exec -it wildfly-deployment-6c87554f4f-klhfs bash
+
+cat /etc/hosts
+ping mariadb   no lo resuelve (no se ven entre pods, si con la ip) para eso crear el servicio:
+
+Creación del servicio:
+kubectl apply -f servicioMariadb.yml
+
+kubectl get services
+
+kubectl get pods
+
+kubectl exec -it wildfly-deployment-6c87554f4f-klhfs bash
+ping mariadb-service   si lo resuelve
+
+kubectl describe service mariadb-service                    --> describir el servicio
+
+
+Ingress  (rutas)           --> exponer los servicios del cluser desde afuer (desde internet)
+
+crear servicio
+kubectl apply -f servicioWildfly.yml
+
+minikube addons enable ingress                  --> activar funcionalidad de ingress en minikube local
+
+kubectl apply -f ingress.yml
+
+kubectl get ingress
+kubectl describe ingress
+kubectl get ingress
+
+minikube ip                     --> saber nuestra direccion ip de nuestro minikube
+
+
+
+minikube docker-env
+
+eval $(minikube -p minikube docker-env)
+
+docker ps
+
+
+------------------------
+Aplicacion:
+
+docker run -it --rm --name my-maven-project -v "$(pwd)":/usr/src/mymaven -w /usr/src/mymaven maven:3.3-jdk-8 mvn clean install
+
+
+Desplegar aplicacion
+
+kubectl apply -f namespace.yml                  --> se crea el namespace y luego se lanzan todos los .yml
+kubectl apply -f .
+
+kubectl get pods
+
+kubectl get all                 --> muestra todos (pods, services, deployment, replicaset)
+
+kubectl get ingress
+
+
+kubens              --> para cambiar rapidamente entre el namespaces en el que estamos
+https://github.com/ahmetb/kubectx
+
+kubens default
+
+kubectl get pods
+
+
+minikube ip             (abrir en el navegador)
+
+Probes                  ---> comprobaciones con respecto a la salud de nuestras apps
+
+
+
+
+
+
+
+
