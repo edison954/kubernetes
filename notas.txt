@@ -254,8 +254,22 @@ kubectl logs -f wildfly-deployment-6c87554f4f-klhfs
 
 kubectl get pods -w
 
+Limites (de memoria o cpu)
+request (recursos minimos que necesita el pod para ejecutarse)  (512Mi milicores)  1000Mi = 1 core completo
 
+        resources:
+          requests:
+            memory: "150Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
 
+kubectl apply -f .
+
+kubectl get all
+
+kubectl describe pod wildfly-deployment-6c87554f4f-klhfs
 
 
 
