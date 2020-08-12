@@ -233,7 +233,26 @@ minikube ip             (abrir en el navegador)
 
 Probes                  ---> comprobaciones con respecto a la salud de nuestras apps
 
+livenessProbe               --> evalua si un servicio esta levantado
+readinessProbe          --> despues de estar levantado revisar si esta en disposicion de aceptar peticion o no
 
+
+kubectl delete -f .
+
+kubectl apply -f namespace.yml
+
+kubectl apply -f deploymentWildFly.yml
+
+kubectl get events -w
+
+kubectl apply -f deploymentMariadb.yml
+kubectl apply -f servicioMariadb.yml
+
+kubectl get pods
+kubectl logs -f wildfly-deployment-6c87554f4f-klhfs
+
+
+kubectl get pods -w
 
 
 
