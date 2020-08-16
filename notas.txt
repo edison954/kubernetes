@@ -271,5 +271,44 @@ kubectl get all
 
 kubectl describe pod wildfly-deployment-6c87554f4f-klhfs
 
+https://developers.redhat.com/blog/2019/05/27/command-line-tools-for-kubernetes-kubectl-stern-kubectx-kubens/
+https://github.com/wercker/stern/releases
 
 
+Configmap y secretos   (para poner variables de configuracion)
+
+
+minikube docker-env
+
+eval $(minikube docker-env)
+
+Compilar y generar imagen del proyecto de aplicacion:
+docker run -it --rm --name my-maven-project -v "$(pwd)":/usr/src/mymaven -w /usr/src/mymaven maven:3.3-jdk-8 mvn clean install
+
+eliminar namespace
+
+kubectl delete namespace curso
+
+cd k8s
+
+crear namespace
+kubectl apply -f namespace.yml
+
+crear Configmap
+kubectl create configmap config-app --from-file=config.properties -n curso
+
+ver configmap creado
+kubectl -n curso  get configmaps
+
+describe el configmap
+kubectl -n curso  describe configmaps config-app
+
+
+crear secretos
+kubectl create secret generic db-user-pass --from-file=secretos.properties -n curso
+
+ver secretos
+kubectl -n curso  get secrets
+
+describir secreto
+kubectl -n curso  describe secret db-user-pass
