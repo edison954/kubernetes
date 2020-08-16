@@ -312,3 +312,20 @@ kubectl -n curso  get secrets
 
 describir secreto
 kubectl -n curso  describe secret db-user-pass
+
+
+crear toda la infraestructura
+kubectl apply -f .
+
+
+ver todo:
+kubectl get all
+
+kubectl exec -it wildfly-deployment
+
+Crear secrretos para variable de entorno
+
+kubectl create secret generic db-pass --from-literal=usuario=admin321 -n curso
+
+
+
