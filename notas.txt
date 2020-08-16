@@ -327,5 +327,7 @@ Crear secrretos para variable de entorno
 
 kubectl create secret generic db-pass --from-literal=usuario=admin321 -n curso
 
+instalar extension de kubernetes en vsto code
 
-
+cambiar namespace 
+kubectl config set-context --current --namespace=mynamespace
